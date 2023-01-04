@@ -1,9 +1,0 @@
-﻿<div class="container" style="white-space: nowrap; margin-left: 0">
-    <NavLink class="nav-link" href="" Match="NavLinkMatch.All" style="display: inline-block">Home</NavLink>
-    @foreach (var route in Routes)
-    {
-        <span class="oi oi-chevron-right" aria-hidden="true" style="display: inline-block"/>
-        <NavLink class="nav-link" href=@(route.Path) style="display: inline-block">@route.Route</NavLink>
-    }
-    
-</div>
