@@ -16,8 +16,9 @@ public class PostRepository : IPostRepository
     public async Task<ICollection<Post>> GetAllPosts()
         => await _dbContext.Posts.ToListAsync();
     
-    public async Task<Post?> GetPostById(int id)
-        => await _dbContext.Posts.FirstOrDefaultAsync(post => post.Id == id);
+    public async Task<Post> GetPostById(int id)
+        => await _dbContext.Posts.FirstOrDefaultAsync(post => post.Id == id) 
+           ?? throw new KeyNotFoundException();
     
 
     public async Task<Post> CreatePost(Post create)
