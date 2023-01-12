@@ -6,7 +6,7 @@ using MinimalAPIDemo.Abstractions;
 
 namespace WebAPIDemo.EndpointDefinitions;
 
-public class PostEndpointDefinitions : IEndpointDefinition
+public class PostEndpointDefinitions
 {
     public void RegisterEndpoints(WebApplication app)
     {
@@ -56,7 +56,7 @@ public class PostEndpointDefinitions : IEndpointDefinition
 
     private async Task<IResult> GetPostById(int id, IMediator mediator)
     {
-        var getPost = new GetPostById() {postId = id};
+        var getPost = new GetPostById() {Id = id};
         var post = await mediator.Send(getPost);
         
         return post is null ? Results.NotFound() : Results.Ok(post);

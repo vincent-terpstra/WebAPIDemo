@@ -12,7 +12,7 @@ public class Program
 
         var builder = WebApplication.CreateBuilder(args);
         builder.RegisterServices();
-
+        
         var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,7 +34,9 @@ public class Program
 
         app.UseAuthorization();
 
+        
         app.RegisterExceptionHandling();
+        app.MapControllers();
         app.RegisterEndpoints();
 
         app.Run();
