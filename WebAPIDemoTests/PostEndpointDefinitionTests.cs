@@ -128,6 +128,42 @@ public class PostEndpointDefinitionTests
         Assert.Equal(HttpStatusCode.NotFound, checkDelete.StatusCode);
     }
 
+    [Fact]
+    public async void Create_PostMessage_Cannot_Be_Empty()
+    {
+        //Arrange
+        var post = new
+        {
+            postContent = String.Empty
+        };
+        
+        //Act
+        var result = await _api.PostAsJsonAsync("/api/posts", post);
+        PostContentRoot? postContentRoot = await result.Content.ReadFromJsonAsync<PostContentRoot>();
+        
+        //Assert
+        Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
+        Assert.Equal( "The PostContent field is required.",postContentRoot?.PostContent[0]);
+    }
+    
+    [Fact]
+    public async void CreatePost_Message_Must_Be_Less_Then_Twenty()
+    {
+        //Arrange
+        var post = new
+        {
+            postContent = "abcdefghijklmnopqrstuvwxyz" 
+        };
+        
+        //Act
+        var result = await _api.PostAsJsonAsync("/api/posts", post);
+        PostContentRoot? postContentRoot = await result.Content.ReadFromJsonAsync<PostContentRoot>();
+        
+        //Assert
+        Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
+        Assert.Equal( "Post content must be less then 20 characters",postContentRoot?.PostContent[0]);
+    }
+
     private async Task<Post?> GetPostById(int id)
     {
         var response = await _api.GetAsync($"/api/posts/{id}");

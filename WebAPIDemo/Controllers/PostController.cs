@@ -64,7 +64,7 @@ public class PostController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Post>> CreatePost([FromBody] CreatePost newPost)
     {
-        if (!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) return BadRequest(ModelState);
 
         try
         {
@@ -83,7 +83,7 @@ public class PostController : ControllerBase
     [Route("/api/posts/{id}")]
     public async Task<ActionResult<Post>> UpdatePost(int id, [FromBody] UpdatePost updatePost)
     {
-        if (ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) return BadRequest();
 
         try
         {

@@ -8,10 +8,9 @@ public class PostRepository : IPostRepository
 {
     private readonly AppDbContext.AppDbContext _dbContext;
 
-    public PostRepository(AppDbContext.AppDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
+    public PostRepository(AppDbContext.AppDbContext dbContext) 
+        => _dbContext = dbContext;
+    
 
     public async Task<ICollection<Post>> GetAllPosts()
         => await _dbContext.Posts.ToListAsync();
