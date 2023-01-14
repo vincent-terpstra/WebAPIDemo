@@ -3,17 +3,17 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace WebAPIDemo.Filters;
 
-public class ModelStateValidation : Attribute, IAsyncActionFilter
+public class ModelStateValidationAttribute : Attribute, IAsyncActionFilter
 {
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
-        if (!context.ModelState.IsValid)
+        if (context.ModelState.IsValid)
         {
-            context.Result = new BadRequestObjectResult(context.ModelState);
+            await next.Invoke();
         }
         else
         {
-            await next.Invoke();
+            context.Result = new BadRequestObjectResult(context.ModelState);
         }
     }
 }
