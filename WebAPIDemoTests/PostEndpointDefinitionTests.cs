@@ -32,7 +32,7 @@ public class PostEndpointDefinitionTests
         //Arrange
         var post = new
         {
-            postContent = "valid string"
+            Content = "valid string"
         };
         
         //Act
@@ -41,7 +41,7 @@ public class PostEndpointDefinitionTests
 
         //Assert
         Assert.Equal(HttpStatusCode.Created, result.StatusCode);
-        Assert.Equal(content?.Content, post.postContent);
+        Assert.Equal(content?.Content, post.Content);
         Assert.EndsWith($@"/api/posts/{content?.Id}", result.Headers.Location?.ToString() ?? "");
 
         await DeletePostById(content?.Id);
@@ -83,7 +83,7 @@ public class PostEndpointDefinitionTests
         int postId = await CreateValidPost();
         UpdatePost updatePost = new()
         {
-            PostContent = "Updated Content"
+            Content = "Updated Content"
         };
 
         //Act
@@ -93,8 +93,8 @@ public class PostEndpointDefinitionTests
         
         //Assert
         Assert.Equal(HttpStatusCode.OK, result.StatusCode);
-        Assert.Equal(updatePost.PostContent, content?.Content);
-        Assert.Equal(updatePost.PostContent, updated?.Content);
+        Assert.Equal(updatePost.Content, content?.Content);
+        Assert.Equal(updatePost.Content, updated?.Content);
         
         await DeletePostById(content?.Id);
     }
@@ -134,7 +134,7 @@ public class PostEndpointDefinitionTests
         //Arrange
         var post = new
         {
-            postContent = String.Empty
+            Content = String.Empty
         };
         
         //Act
@@ -143,7 +143,7 @@ public class PostEndpointDefinitionTests
         
         //Assert
         Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
-        Assert.Equal( "The PostContent field is required.",postContentRoot?.PostContent[0]);
+        Assert.Equal( "The Content field is required.",postContentRoot?.Content[0]);
     }
     
     [Fact]
@@ -152,7 +152,7 @@ public class PostEndpointDefinitionTests
         //Arrange
         var post = new
         {
-            postContent = "abcdefghijklmnopqrstuvwxyz" 
+            Content = "abcdefghijklmnopqrstuvwxyz" 
         };
         
         //Act
@@ -161,7 +161,7 @@ public class PostEndpointDefinitionTests
         
         //Assert
         Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
-        Assert.Equal( "Post content must be less then 20 characters",postContentRoot?.PostContent[0]);
+        Assert.Equal( "Post content must be less then 20 characters",postContentRoot?.Content[0]);
     }
 
     private async Task<Post?> GetPostById(int id)
@@ -180,7 +180,7 @@ public class PostEndpointDefinitionTests
     {
         var validPost = new CreatePost()
         {
-            PostContent = "Valid string"
+            Content = "Valid string"
         };
         
         var result = await _api.PostAsJsonAsync("/api/posts", validPost);

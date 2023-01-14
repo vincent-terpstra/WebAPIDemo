@@ -2,25 +2,18 @@
 using Application.Posts.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Npgsql.PostgresTypes;
+using WebAPIDemo.Filters;
 
 namespace WebAPIDemo.Controllers;
 
 [Route("/api/posts/")]
-public class PostController : ControllerBase
+public class PostController : BaseController<PostController>
 {
-    private readonly IMediator _mediator;
-    private readonly ILogger<PostController> _logger;
-
-    public PostController(IMediator mediator, ILogger<PostController> logger)
-    {
-        _mediator = mediator;
-        _logger = logger;
-    }
-
     [HttpGet]
     public ActionResult<List<Post>> GetAllPosts()
     {
-        return Ok(_mediator.Send(new GetAllPosts()));
+        return Ok(Mediator.Send(new GetAllPosts()));
     }
 
     [HttpGet]
@@ -29,17 +22,17 @@ public class PostController : ControllerBase
     {
         try
         {
-            Post? post = await _mediator.Send(new GetPostById() {Id = id});
+            Post? post = await Mediator.Send(new GetPostById() {Id = id});
             return Ok(post);
         }
-        catch (KeyNotFoundException keyNotFoundException)
+        catch (KeyNotFoundException)
         {
-            _logger.LogError("Unable to find Post {Id}", id);
+            Logger.LogError("Unable to find Post {Id}", id);
             return NotFound();
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unable to get Post {Id}", id);
+            Logger.LogError(ex, "Unable to get Post {Id}", id);
             return StatusCode(500);
         }
     }
@@ -50,51 +43,49 @@ public class PostController : ControllerBase
     {
         try
         {
-            await _mediator.Send(new DeletePost() {Id = id});
-            _logger.LogInformation("Post deleted {Id}", id);
+            await Mediator.Send(new DeletePost() {Id = id});
+            Logger.LogInformation("Post deleted {Id}", id);
             return NoContent();
         }
         catch (KeyNotFoundException)
         {
-            _logger.LogWarning("Unable to delete {Id} Not Found ", id);
+            Logger.LogWarning("Unable to delete {Id} Not Found ", id);
             return NotFound();
         }
     }
 
     [HttpPost]
+    [ModelStateValidation]
     public async Task<ActionResult<Post>> CreatePost([FromBody] CreatePost newPost)
     {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
-
         try
         {
-            Post post = await _mediator.Send(newPost);
-            _logger.LogInformation("Post created");
+            Post post = await Mediator.Send(newPost);
+            Logger.LogInformation("Post created");
             return CreatedAtRoute(nameof(GetPostById), new {Id = post.Id}, post);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unable to create post");
+            Logger.LogError(ex, "Unable to create post");
             return StatusCode(500);
         }
     }
 
     [HttpPut]
     [Route("/api/posts/{id}")]
+    [ModelStateValidation]
     public async Task<ActionResult<Post>> UpdatePost(int id, [FromBody] UpdatePost updatePost)
     {
-        if (!ModelState.IsValid) return BadRequest();
-
         try
         {
             updatePost.PostId = id;
-            Post post = await _mediator.Send(updatePost);
-            _logger.LogInformation("Post updated");
+            Post post = await Mediator.Send(updatePost);
+            Logger.LogInformation("Post updated");
             return Ok(post);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex,"Unable to update post");
+            Logger.LogError(ex,"Unable to update post");
             return StatusCode(500);
         }
     }

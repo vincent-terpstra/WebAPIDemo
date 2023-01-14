@@ -10,7 +10,7 @@
 /// </summary>
 public class PostContentRoot
 {
-    public string[] PostContent { get; set; }
+    public string[] Content { get; set; }
 }
 
 

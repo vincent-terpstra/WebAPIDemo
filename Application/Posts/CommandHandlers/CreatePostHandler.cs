@@ -18,7 +18,7 @@ public class CreatePostHandler :IRequestHandler<CreatePost, Post>
     {
         var newPost = new Post()
         {
-            Content = request.PostContent
+            Content = request.Content
         };
 
         return await _repository.CreatePost(newPost);

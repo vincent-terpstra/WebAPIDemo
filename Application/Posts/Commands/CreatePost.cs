@@ -8,5 +8,5 @@ public class CreatePost : IRequest<Post>
 {
     [Required]
     [StringLength(20, ErrorMessage = "Post content must be less then {1} characters", MinimumLength = 1)]
-    public string PostContent { get; set; }
+    public string Content { get; set; }
 }
