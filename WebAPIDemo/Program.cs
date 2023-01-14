@@ -2,6 +2,7 @@ using Application.Abstractions;
 using DataAccess;
 using MinimalAPIDemo;
 using WebAPIDemo.Extensions;
+using WebAPIDemo.Filters;
 
 namespace WebAPIDemo;
 
@@ -11,6 +12,14 @@ public class Program
     {
 
         var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddControllers(
+            cfg =>
+            {
+                cfg.Filters.Add(typeof(ExceptionHandlerFilter));
+            });
+        
+        
         builder.RegisterServices();
         
         var app = builder.Build();
