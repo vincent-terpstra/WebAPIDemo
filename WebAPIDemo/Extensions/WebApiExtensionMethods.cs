@@ -1,6 +1,5 @@
 ﻿using Application.Abstractions;
 using Application.Posts.Commands;
-using DataAccess;
 using DataAccess.AppDbContext;
 using DataAccess.DbAccess;
 using DataAccess.Repositories;
@@ -10,7 +9,7 @@ using MinimalAPIDemo.Abstractions;
 
 namespace WebAPIDemo.Extensions;
 
-public static class WebAPIExtensionMethods
+public static class WebApiExtensionMethods
 {
     public static void RegisterServices(this WebApplicationBuilder builder)
     {
