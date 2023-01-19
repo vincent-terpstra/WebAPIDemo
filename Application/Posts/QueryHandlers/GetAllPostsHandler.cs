@@ -16,7 +16,6 @@ public class GetAllPostsHandler : IRequestHandler<GetAllPosts, ICollection<Post>
     
     
     public async Task<ICollection<Post>> Handle(GetAllPosts request, CancellationToken cancellationToken)
-    {
-        return await _postRepository.GetAllPosts();
-    }
+        => await _postRepository.GetAllPosts();
+    
 }

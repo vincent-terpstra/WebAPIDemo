@@ -13,14 +13,8 @@ public class CreatePostHandler :IRequestHandler<CreatePost, Post>
     {
         _repository = repository;
     }
-    
-    public async Task<Post> Handle(CreatePost request, CancellationToken cancellationToken)
-    {
-        var newPost = new Post()
-        {
-            Content = request.Content
-        };
 
-        return await _repository.CreatePost(newPost);
-    }
+    public async Task<Post> Handle(CreatePost request, CancellationToken cancellationToken)
+        => await _repository.CreatePost(new Post() { Content = request.Content });
+
 }

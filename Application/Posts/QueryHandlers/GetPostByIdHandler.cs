@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Posts.QueryHandlers;
 
-public class GetPostByIdHandler : IRequestHandler<GetPostById, Post?>
+public class GetPostByIdHandler : IRequestHandler<GetPostById, Post>
 {
     private readonly IPostRepository _postRepository;
 
@@ -15,7 +15,6 @@ public class GetPostByIdHandler : IRequestHandler<GetPostById, Post?>
     }
     
     public async Task<Post> Handle(GetPostById request, CancellationToken cancellationToken)
-    {
-        return await _postRepository.GetPostById(request.Id);
-    }
+        => await _postRepository.GetPostById(request.Id);
+    
 }

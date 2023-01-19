@@ -15,7 +15,5 @@ public class UpdatePostHandler : IRequestHandler<UpdatePost, Post>
     }
     
     public async Task<Post> Handle(UpdatePost request, CancellationToken cancellationToken)
-    {
-        return await _postRepository.UpdatePost(request.Content, request.PostId);
-    }
+        => await _postRepository.UpdatePost(request.Content, request.PostId);
 }

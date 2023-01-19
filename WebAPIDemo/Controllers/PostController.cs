@@ -10,17 +10,14 @@ public class PostController : BaseController<PostController>
 {
     [HttpGet]
     public ActionResult<List<Post>> GetAllPosts()
-    {
-        return Ok(Mediator.Send(new GetAllPosts()));
-    }
+        => Ok(Mediator.Send(new GetAllPosts()));
+    
 
     [HttpGet]
     [Route("/api/posts/{id}", Name = "GetPostById")]
     public async Task<ActionResult<Post>> GetPostById(int id)
-    {
-        Post post = await Mediator.Send(new GetPostById() {Id = id});
-        return Ok(post);
-    }
+        => Ok( await Mediator.Send(new GetPostById() {Id = id}));
+    
 
     [HttpDelete]
     [Route("/api/posts/{id}")]

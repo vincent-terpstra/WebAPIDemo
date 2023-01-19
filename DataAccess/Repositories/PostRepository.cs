@@ -32,10 +32,9 @@ public class PostRepository : IPostRepository
 
     public async Task<Post> UpdatePost(string updatedContent, int postId)
     {
-        var post = await GetPostById(postId);
-        if (post is null)
-            throw new KeyNotFoundException();
-
+        var post = await GetPostById(postId) 
+                   ?? throw new KeyNotFoundException();
+        
         post.Content = updatedContent;
         post.DateModified = DateTime.Now;
         
@@ -47,9 +46,8 @@ public class PostRepository : IPostRepository
 
     public async Task DeletePost(int postId)
     {
-        var post = await GetPostById(postId);
-        if (post is null)
-            throw new KeyNotFoundException();
+        var post = await GetPostById(postId) 
+                   ?? throw new KeyNotFoundException();
         
         _dbContext.Posts.Remove(post);
         await _dbContext.SaveChangesAsync();
