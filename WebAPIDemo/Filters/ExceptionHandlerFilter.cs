@@ -14,15 +14,7 @@ public class ExceptionHandlerFilter : IExceptionFilter
 
     public void OnException(ExceptionContext context)
     {
-        switch (context.Exception)
-        {
-            case KeyNotFoundException:
-                context.Result = new StatusCodeResult(StatusCodes.Status404NotFound);
-                break;
-            default:
-                context.Result = new StatusCodeResult(StatusCodes.Status500InternalServerError);
-                _logger.LogError(context.Exception, "Unhandled Exception");
-                break;
-        }
+        context.Result = new StatusCodeResult(StatusCodes.Status500InternalServerError);
+        _logger.LogError(context.Exception, "Unhandled Exception");
     }
 }

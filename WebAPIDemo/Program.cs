@@ -13,12 +13,7 @@ public class Program
 
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddControllers(
-            cfg =>
-            {
-                cfg.Filters.Add(typeof(ExceptionHandlerFilter));
-            });
-        
+        builder.Services.AddControllers();
         
         builder.RegisterServices();
         
@@ -42,10 +37,12 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
-
         
         app.RegisterExceptionHandling();
+        app.UseMiddleware<KeyNotFoundMiddleware>();
+        
         app.MapControllers();
+        
         app.RegisterEndpoints();
 
         app.Run();

@@ -188,4 +188,6 @@ public class PostEndpointDefinitionTests
         Post content = await result.Content.ReadFromJsonAsync<Post>() ?? throw new InvalidOperationException();
         return content.Id;
     }
+
+    
 }
