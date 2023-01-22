@@ -39,6 +39,8 @@ public class Program
         app.UseAuthorization();
         
         app.RegisterExceptionHandling();
+        
+        app.UseMiddleware<ExceptionHandlerMiddleware>();
         app.UseMiddleware<KeyNotFoundMiddleware>();
         
         app.MapControllers();
