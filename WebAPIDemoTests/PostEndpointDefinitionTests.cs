@@ -1,14 +1,8 @@
 using System;
-using System.Net;
-using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Application.Posts.Commands;
 using Domain.Models;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Testing;
-using WebAPIDemo;
-using Xunit;
 
 namespace MinimalAPIDemoTests;
 

@@ -5,6 +5,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f5e9e4b6_002D817e_002D4a01_002D8643_002Dd77279a564a1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Add_SimpleValues_Should_Calculate" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::A0D22EF9-0410-4649-B96E-DFA776406D2C::net7.0::MinimalAPIDemoTests.PostEndpointDefinitionTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A0D22EF9-0410-4649-B96E-DFA776406D2C::net7.0::MinimalAPIDemoTests.ThrowsControllerTests.Controller_throws_error_returns_500&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
