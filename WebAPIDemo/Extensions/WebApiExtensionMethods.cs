@@ -1,6 +1,6 @@
 ﻿using Application.Abstractions;
 using Application.Posts.Commands;
-using DataAccess.AppDbContext;
+using DataAccess.DataBase;
 using DataAccess.DbAccess;
 using DataAccess.Repositories;
 using MediatR;

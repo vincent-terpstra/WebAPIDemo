@@ -1,4 +1,5 @@
 ﻿using Application.Abstractions;
+using DataAccess.DataBase;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,9 +7,9 @@ namespace DataAccess.Repositories;
 
 public class PostRepository : IPostRepository
 {
-    private readonly AppDbContext.AppDbContext _dbContext;
+    private readonly AppDbContext _dbContext;
 
-    public PostRepository(AppDbContext.AppDbContext dbContext) 
+    public PostRepository(AppDbContext dbContext) 
         => _dbContext = dbContext;
     
 

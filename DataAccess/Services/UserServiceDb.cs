@@ -1,13 +1,14 @@
-﻿using Domain.Models;
+﻿using DataAccess.DataBase;
+using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Services;
 
 public class UserServiceDb : IUserService
 {
-    private readonly AppDbContext.AppDbContext _context;
+    private readonly AppDbContext _context;
 
-    public UserServiceDb(AppDbContext.AppDbContext context)
+    public UserServiceDb(AppDbContext context)
     {
         _context = context;
     }
