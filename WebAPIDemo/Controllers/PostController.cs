@@ -47,4 +47,6 @@ public class PostController : BaseController<PostController>
         Logger.LogInformation("Post updated");
         return Ok(post);
     }
+
+    
 }

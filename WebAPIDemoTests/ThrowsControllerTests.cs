@@ -1,4 +1,10 @@
-﻿namespace MinimalAPIDemoTests;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Net.Http.Json;
+using Domain.Models;
+using Microsoft.AspNetCore.WebUtilities;
+
+namespace MinimalAPIDemoTests;
 
 public class ThrowsControllerTests
 {
@@ -25,5 +31,28 @@ public class ThrowsControllerTests
 
         //Assert
         Assert.Equal(HttpStatusCode.InternalServerError,  response.StatusCode);
+    }
+
+    [Fact]
+    public async void Controller_Returns_Query_Params()
+    {
+
+        string Query = "Hello Query";
+        int value = 42;
+            //Arrange
+        var query = new Dictionary<string, string?>()
+        {
+            ["queryString"] = Query,
+            ["queryInt"] = value.ToString(),
+        };
+
+        var uri = QueryHelpers.AddQueryString("/api/query", query);
+
+        var response = await _api.GetAsync(uri);
+        var content = await response.Content.ReadFromJsonAsync<QueryModel>();
+        
+        Assert.Equal(Query, content.Query);
+        Assert.Equal(value, content.Value);
+
     }
 }

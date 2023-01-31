@@ -11,4 +11,17 @@ public class ThrowsController : ControllerBase
     {
         throw new Exception("Whoops");
     }
+    
+    [HttpGet]
+    [Route("/api/query")]
+    public async Task<ActionResult<QueryModel>> GetQuery([FromQuery] string queryString, [FromQuery] int queryInt)
+    {
+        QueryModel obj = new()
+        {
+            Query = queryString,
+            Value = queryInt
+        };
+
+        return Ok(obj);
+    }
 }

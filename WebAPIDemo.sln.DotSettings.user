@@ -6,6 +6,7 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::A0D22EF9-0410-4649-B96E-DFA776406D2C::net7.0::MinimalAPIDemoTests.PostEndpointDefinitionTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::A0D22EF9-0410-4649-B96E-DFA776406D2C::net7.0::MinimalAPIDemoTests.ThrowsControllerTests.Controller_throws_error_returns_500&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::A0D22EF9-0410-4649-B96E-DFA776406D2C::net7.0::MinimalAPIDemoTests.ThrowsControllerTests.Controller_Returns_Query_Params&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
