@@ -24,8 +24,8 @@ public static class WebApiExtensionMethods
         );
 
         builder.Services.AddDbContext<AppDbContext>(
-            //opt => opt.UseSqlite(builder.Configuration.GetConnectionString("WebApiDatabase"))
-            opt => opt.UseInMemoryDatabase("InMem")
+            opt => opt.UseSqlite(builder.Configuration.GetConnectionString("WebApiDatabase"), 
+                b => b.MigrationsAssembly("WebAPIDemo"))
         );
 
         builder.Services.AddScoped<IPostRepository, PostRepository>();
