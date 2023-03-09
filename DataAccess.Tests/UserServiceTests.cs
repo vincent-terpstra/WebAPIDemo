@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccess.DbAccess;
 using DataAccess.Services;
-using Domain.Models;
+using Domain.Models.Person;
 using Moq;
 using Xunit;
 
@@ -31,13 +31,15 @@ public class UserServiceTests
         {
             new PersonModel()
             {
-                Firstname = "first person",
-                Lastname = "last"
-            },
-            new PersonModel()
-            {
-                Firstname = "second person",
-                Lastname = "last"
+                UserInfo = new ()
+                {
+                    Name = new ()
+                    {
+                        Firstname = "first person",
+                        Lastname = "last"
+                    }
+                }
+                
             }
         };
         var setup = _mock.Setup(
@@ -60,8 +62,15 @@ public class UserServiceTests
         //Arrange
         PersonModel person = new PersonModel()
         {
-            Firstname = "First",
-            Lastname = "last"
+            UserInfo = new()
+            {
+                Name = new()
+                {
+                    Firstname = "first person",
+                    Lastname = "last"
+                }
+            }
+
         };
         _mock.Setup(x => x.SaveDataAsync("user_create", IsAny));
         
@@ -80,8 +89,15 @@ public class UserServiceTests
         //Arrange
         PersonModel person = new PersonModel()
         {
-            Firstname = firstname,
-            Lastname = lastname
+            UserInfo = new()
+            {
+                Name = new()
+                {
+                    Firstname = "first person",
+                    Lastname = "last"
+                }
+            }
+
         };
         _mock.Setup(x => x.SaveDataAsync("user_create", IsAny));
         //Act

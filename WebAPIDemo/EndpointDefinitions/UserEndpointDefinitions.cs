@@ -1,4 +1,5 @@
-﻿using MinimalAPIDemo.Abstractions;
+﻿using Domain.Models.Person;
+using MinimalAPIDemo.Abstractions;
 
 namespace WebAPIDemo.EndpointDefinitions;
 
@@ -25,7 +26,7 @@ public class UserEndpointDefinitions : IEndpointDefinition
         }
     }
 
-    private async Task<IResult> GetUser(int id, IUserService service)
+    private async Task<IResult> GetUser(Guid id, IUserService service)
     {
         try
         {
@@ -43,8 +44,7 @@ public class UserEndpointDefinitions : IEndpointDefinition
     {
         try
         {
-            await service.InsertUserAsync(new PersonModel()
-                {Firstname = model.Firstname, Lastname = model.Lastname, Email = model.Email});
+            //await service.InsertUserAsync(new PersonModel(){Firstname = model.Firstname, Lastname = model.Lastname, Email = model.Email});
             return Results.Ok();
         }
         catch (Exception ex)
@@ -66,7 +66,7 @@ public class UserEndpointDefinitions : IEndpointDefinition
         }
     }
 
-    private async Task<IResult> DeleteUser(int id, IUserService service)
+    private async Task<IResult> DeleteUser(Guid id, IUserService service)
     {
         try
         {

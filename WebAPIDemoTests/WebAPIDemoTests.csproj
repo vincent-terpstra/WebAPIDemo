@@ -7,6 +7,8 @@
         <IsPackable>false</IsPackable>
 
         <RootNamespace>MinimalAPIDemoTests</RootNamespace>
+
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>

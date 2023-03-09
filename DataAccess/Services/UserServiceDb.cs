@@ -1,5 +1,6 @@
 ﻿using DataAccess.DataBase;
 using Domain.Models;
+using Domain.Models.Person;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Services;
@@ -17,16 +18,18 @@ public class UserServiceDb : IUserService
         => Task.FromResult<IEnumerable<PersonModel>>( _context.PersonModels);
     
 
-    public Task<PersonModel?> GetUserAsync(int id)
+    public Task<PersonModel?> GetUserAsync(Guid id)
         => _context.PersonModels.FirstOrDefaultAsync(model => model.Id == id);
     
 
     public async Task<PersonModel> InsertUserAsync(PersonModel person)
     {
-        if (string.IsNullOrWhiteSpace(person.Firstname))
+
+        Name name = person.UserInfo.Name;
+        if (string.IsNullOrWhiteSpace(name.Firstname))
             throw new ArgumentException("Person requires a first name", "FirstName");
         
-        if (string.IsNullOrWhiteSpace(person.Lastname))
+        if (string.IsNullOrWhiteSpace(name.Lastname))
             throw new ArgumentException("Person requires a last name", "LastName");
 
         _context.PersonModels.Add(person);
@@ -41,7 +44,7 @@ public class UserServiceDb : IUserService
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteUserAsync(int id)
+    public async Task DeleteUserAsync(Guid id)
     {
         var userToDelete = await _context.PersonModels.FirstOrDefaultAsync(model => model.Id == id);
         if (userToDelete is null)

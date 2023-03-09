@@ -16,13 +16,6 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-
-    var scope = app.Services.CreateScope();
-    var users = scope.ServiceProvider.GetRequiredService<IUserService>();
-    users.PopulateDbUsers();
-
-    var posts = scope.ServiceProvider.GetRequiredService<IPostRepository>();
-    posts.PopulateDbPosts();
 }
 
 app.UseHttpsRedirection();
